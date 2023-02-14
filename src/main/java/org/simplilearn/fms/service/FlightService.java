@@ -21,7 +21,10 @@ public class FlightService implements IFlightService {
 	@Override
 	public boolean save(Flight flight) {
 		if (flight.getId() > 0) {
-			return this.flightDao.update(flight);
+			Flight existingFlight = get(flight.getId());
+			existingFlight.setModel(flight.getModel());
+			existingFlight.setAirline(flight.getAirline());
+			return this.flightDao.update(existingFlight);
 		} else {
 			return this.flightDao.insert(flight);
 		}		

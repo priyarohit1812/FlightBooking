@@ -19,6 +19,7 @@ public class TicketDao implements ITicketDao {
 		Query<Ticket> query = session.createQuery(hql, Ticket.class);
 		List<Ticket> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -28,6 +29,7 @@ public class TicketDao implements ITicketDao {
 		Session session = factory.openSession();
 		Ticket ticket = session.get(Ticket.class, id);
 		session.close();
+		factory.close();
 		return ticket;
 	}
 
@@ -47,6 +49,7 @@ public class TicketDao implements ITicketDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -68,6 +71,7 @@ public class TicketDao implements ITicketDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -92,6 +96,7 @@ public class TicketDao implements ITicketDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;

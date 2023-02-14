@@ -24,19 +24,23 @@ public class Flight {
 	@OneToMany(mappedBy = "flight", cascade = CascadeType.PERSIST)
 	private Set<FlightSchedule> flightSchedule = new HashSet<>();
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "airline_id")
 	private Airline airline;
 
 	public Flight() {
-		this(0, "");
+		this(0, null, null);
 	}
+	
+	
 
-	public Flight(int id, String model) {
-		super();
+	public Flight(int id, String model, Airline airline) {
 		this.id = id;
 		this.model = model;
+		this.airline = airline;
 	}
+
+
 
 	public int getId() {
 		return id;

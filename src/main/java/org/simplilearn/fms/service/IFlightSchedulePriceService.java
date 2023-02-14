@@ -7,7 +7,6 @@ import org.simplilearn.fms.entities.FlightSchedulePrice;
 public interface IFlightSchedulePriceService {
 	List<FlightSchedulePrice> getAll();
 	FlightSchedulePrice get(int id);
-	boolean insert(FlightSchedulePrice schedulePrice);
-	boolean update(FlightSchedulePrice schedulePrice);
+	boolean save(FlightSchedulePrice schedulePrice);
 	boolean delete(int id);
 }

@@ -19,6 +19,7 @@ public class SeatTypeDao implements ISeatTypeDao {
 		Query<SeatType> query = session.createQuery(hql, SeatType.class);
 		List<SeatType> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -28,6 +29,7 @@ public class SeatTypeDao implements ISeatTypeDao {
 		Session session = factory.openSession();
 		SeatType seatType = session.get(SeatType.class, id);
 		session.close();
+		factory.close();
 		return seatType;
 	}
 
@@ -47,6 +49,7 @@ public class SeatTypeDao implements ISeatTypeDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -68,6 +71,7 @@ public class SeatTypeDao implements ISeatTypeDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -92,6 +96,7 @@ public class SeatTypeDao implements ISeatTypeDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;

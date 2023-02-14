@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.simplilearn.fms.entities.User;
-import org.simplilearn.fms.service.UserService;
 import org.simplilearn.fms.service.IUserService;
+import org.simplilearn.fms.service.UserService;
 import org.simplilearn.fms.utilities.Utility;
 
 @WebServlet("/userform")
@@ -35,15 +35,7 @@ public class UserFormController extends HttpServlet {
 		String password = request.getParameter("password");
 		boolean isAdmin = Boolean.parseBoolean(request.getParameter("isAdmin"));
 		int id =Integer.parseInt(request.getParameter("id"));
-		
-		
-		User user = new User();
-		user.setId(id);
-		user.setName(name);
-		user.setEmail(email);
-		user.setMobile(mobile);
-		user.setPassword(password);
-		user.setAdmin(isAdmin);
+		User user = new User(id, name, password, email, mobile, isAdmin);		
 		userService.save(user);
 		Utility.ShowAlert(request, response, "userform.jsp", "User saved successfully", "./user");
 			

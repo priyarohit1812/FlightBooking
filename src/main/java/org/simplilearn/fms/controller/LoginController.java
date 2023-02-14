@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.simplilearn.fms.entities.FlightSchedulePrice;
 import org.simplilearn.fms.entities.User;
 import org.simplilearn.fms.service.IUserService;
 import org.simplilearn.fms.service.UserService;
@@ -45,9 +46,15 @@ public class LoginController extends HttpServlet {
 			user = this.userService.loginAsAdmin(username, password);
 			fallBackUrl = fallBackUrl + "?isAdmin=" + isAdmin;
 			redirectURL = "adminhome.jsp";
-		} else {
+		} else {			
 			user = this.userService.loginAsUser(username, password);
-			redirectURL = "userhome.jsp";
+			FlightSchedulePrice flightSchedulePrice = (FlightSchedulePrice) session.getAttribute("flightSchedulePrice");
+			if (flightSchedulePrice != null) {
+				redirectURL = "./booking?id="+flightSchedulePrice.getId();
+			} else {
+				redirectURL = "userhome.jsp";
+			}
+			
 		}
 
 		if (user != null) {

@@ -58,13 +58,7 @@ public class FlightScheduleFormController extends HttpServlet {
 		Airport source = this.airportService.get(sourceId);
 		Airport destination = this.airportService.get(destinationId);
 		Flight flight = this.flightService.get(flightId);
-		FlightSchedule flightSchedule = new FlightSchedule();
-		flightSchedule.setId(id);
-		flightSchedule.setFlight(flight);
-		flightSchedule.setSource(source);
-		flightSchedule.setDestination(destination);
-		flightSchedule.setDeparture(departure);
-		flightSchedule.setArrival(arrival);
+		FlightSchedule flightSchedule = new FlightSchedule(id, departure, arrival, source, destination, flight);
 		flightScheduleService.save(flightSchedule);
 		Utility.ShowAlert(request, response, "flightscheduleform.jsp", "Flight Schedule saved successfully",
 				"./flightschedule");

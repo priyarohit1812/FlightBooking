@@ -20,6 +20,7 @@ public class FlightSchedulePriceDao implements IFlightSchedulePriceDao {
 		Query<FlightSchedulePrice> query = session.createQuery(hql, FlightSchedulePrice.class);
 		List<FlightSchedulePrice> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -32,6 +33,7 @@ public class FlightSchedulePriceDao implements IFlightSchedulePriceDao {
 			Hibernate.initialize(schedulePrice.getSeatType());
 		}
 		session.close();
+		factory.close();
 		return schedulePrice;
 	}
 
@@ -51,6 +53,7 @@ public class FlightSchedulePriceDao implements IFlightSchedulePriceDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -72,6 +75,7 @@ public class FlightSchedulePriceDao implements IFlightSchedulePriceDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -96,6 +100,7 @@ public class FlightSchedulePriceDao implements IFlightSchedulePriceDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;

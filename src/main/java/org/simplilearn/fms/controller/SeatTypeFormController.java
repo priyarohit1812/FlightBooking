@@ -34,10 +34,7 @@ public class SeatTypeFormController extends HttpServlet {
 		int id =Integer.parseInt(request.getParameter("id"));
 		
 		
-		SeatType seatType = new SeatType();
-		seatType.setId(id);
-		seatType.setType(code);
-		seatType.setDescription(description);
+		SeatType seatType = new SeatType(id, code, description);
 		seatTypeService.save(seatType);
 		Utility.ShowAlert(request, response, "seattypeform.jsp", "Seat Type saved successfully", "./seattype");
 			

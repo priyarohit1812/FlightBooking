@@ -41,10 +41,7 @@ public class FlightFormController extends HttpServlet {
 		
 		Airline airline = this.airlineService.get(airlineId);
 		
-		Flight flight = new Flight();
-		flight.setId(id);
-		flight.setModel(model);
-		flight.setAirline(airline);
+		Flight flight = new Flight(id, model, airline);
 		flightService.save(flight);
 		Utility.ShowAlert(request, response, "flightform.jsp", "Flight saved successfully", "./flight");
 			

@@ -32,12 +32,8 @@ public class AirlineFormController extends HttpServlet {
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		int id =Integer.parseInt(request.getParameter("id"));
-		
-		
-		Airline airline = new Airline();
-		airline.setId(id);
-		airline.setName(name);
-		airline.setAddress(address);
+				
+		Airline airline = new Airline(id, name, address);
 		airlineService.save(airline);
 		Utility.ShowAlert(request, response, "airlineform.jsp", "Airline saved successfully", "./airline");
 			

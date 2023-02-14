@@ -20,6 +20,7 @@ public class AirlineDao implements IAirlineDao {
 		Query<Airline> query = session.createQuery(hql, Airline.class);
 		List<Airline> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -32,6 +33,7 @@ public class AirlineDao implements IAirlineDao {
 			Hibernate.initialize(airline.getFlights());
 		}
 		session.close();
+		factory.close();
 		return airline;
 	}
 
@@ -51,6 +53,7 @@ public class AirlineDao implements IAirlineDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -72,6 +75,7 @@ public class AirlineDao implements IAirlineDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -96,6 +100,7 @@ public class AirlineDao implements IAirlineDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;

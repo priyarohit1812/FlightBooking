@@ -12,7 +12,7 @@ public class UserService implements IUserService {
 	public UserService() {
 		User rootUser = this.userDao.getRootUser();
 		if (rootUser == null) {
-			this.userDao.insert(new User(0, "Administrator", "admin", "root@fms.com", "0000000000", true, null));
+			this.userDao.insert(new User(0, "Administrator", "admin", "root@fms.com", "0000000000", true));
 		}
 	}
 
@@ -29,7 +29,13 @@ public class UserService implements IUserService {
 	@Override
 	public boolean save(User user) {
 		if (user.getId() > 0) {
-			return this.userDao.update(user);
+			User existingUser = this.get(user.getId());
+			existingUser.setName(user.getName());
+			existingUser.setEmail(user.getEmail());
+			existingUser.setMobile(user.getMobile());
+			existingUser.setPassword(user.getPassword());
+			existingUser.setAdmin(user.isAdmin());
+			return this.userDao.update(existingUser);
 		} else {
 			return this.userDao.insert(user);
 		}

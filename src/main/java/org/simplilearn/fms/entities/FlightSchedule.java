@@ -1,6 +1,7 @@
 package org.simplilearn.fms.entities;
 
 import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,18 +40,16 @@ public class FlightSchedule {
 	private Set<FlightSchedulePrice> flightSchedulePrice = new HashSet<>();
 
 	public FlightSchedule() {
-		this(0, null, null, null, null, null, null);
+		this(0, null, null, null, null, null);
 	}
 
-	public FlightSchedule(int id, Timestamp departure, Timestamp arrival, Airport source, Airport destination, Flight flight,
-			Set<FlightSchedulePrice> flightSchedulePrice) {
+	public FlightSchedule(int id, Timestamp departure, Timestamp arrival, Airport source, Airport destination, Flight flight) {
 		this.id = id;
 		this.departure = departure;
 		this.arrival = arrival;
 		this.source = source;
 		this.destination = destination;
 		this.flight = flight;
-		this.flightSchedulePrice = flightSchedulePrice;
 	}
 
 	public int getId() {
@@ -107,5 +106,18 @@ public class FlightSchedule {
 
 	public void setFlightSchedulePrice(Set<FlightSchedulePrice> flightSchedulePrice) {
 		this.flightSchedulePrice = flightSchedulePrice;
+	}
+	
+	public String getLable() {
+		String lable = "";
+		if (this.id > 0) {
+			String airlineName = this.flight.getAirline().getName();
+			String sourceCity = this.source.getCity();
+			String destinationCity = this.destination.getCity();
+			String departure = this.getDeparture().toLocalDateTime().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+
+			lable = String.format("%s (%s to %s) on %s", airlineName, sourceCity, destinationCity, departure);
+		}
+		return lable;
 	}
 }

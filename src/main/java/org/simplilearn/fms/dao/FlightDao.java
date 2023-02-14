@@ -20,6 +20,7 @@ public class FlightDao implements IFlightDao {
 		Query<Flight> query = session.createQuery(hql, Flight.class);
 		List<Flight> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -32,6 +33,7 @@ public class FlightDao implements IFlightDao {
 			Hibernate.initialize(flight.getFlightSchedule());
 		}
 		session.close();
+		factory.close();
 		return flight;
 	}
 
@@ -51,6 +53,7 @@ public class FlightDao implements IFlightDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -72,6 +75,7 @@ public class FlightDao implements IFlightDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -96,6 +100,7 @@ public class FlightDao implements IFlightDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;

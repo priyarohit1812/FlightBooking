@@ -33,18 +33,16 @@ public class User {
 	private Set<Ticket> tickets = new HashSet<>();
 	
 	public User() {
-		this(0, "", "", "", "", false, new HashSet<>());
+		this(0, "", "", "", "", false);
 	}
 
-	public User(int id, String name, String password, String email, String mobile, boolean isAdmin,
-			Set<Ticket> tickets) {
+	public User(int id, String name, String password, String email, String mobile, boolean isAdmin) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.email = email;
 		this.mobile = mobile;
 		this.isAdmin = isAdmin;
-		this.tickets = tickets;
 	}
 
 	public int getId() {

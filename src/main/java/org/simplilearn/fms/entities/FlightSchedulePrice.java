@@ -22,28 +22,28 @@ public class FlightSchedulePrice {
 	private double price;
 	private int availableSeat;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fms_flight_schedule_id")
 	private FlightSchedule flightSchedule;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<SeatType> seatType = new HashSet<>();
-	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "fms_seat_type_id")
+	private SeatType seatType;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Ticket> tickets = new HashSet<>();
 
 	public FlightSchedulePrice() {
-		this(0, 0.0, 0, null, new HashSet<>(), new HashSet<>());
+		this(0, 0.0, 0, null, null);
 	}
 
 	public FlightSchedulePrice(int id, double price, int availableSeat, FlightSchedule flightSchedule,
-			Set<SeatType> seatType, Set<Ticket> tickets) {
+			SeatType seatType) {
 		this.id = id;
 		this.price = price;
 		this.availableSeat = availableSeat;
 		this.flightSchedule = flightSchedule;
 		this.seatType = seatType;
-		this.tickets = tickets;
 	}
 
 	public int getId() {
@@ -78,11 +78,11 @@ public class FlightSchedulePrice {
 		this.flightSchedule = flightSchedule;
 	}
 
-	public Set<SeatType> getSeatType() {
+	public SeatType getSeatType() {
 		return seatType;
 	}
 
-	public void setSeatType(Set<SeatType> seatType) {
+	public void setSeatType(SeatType seatType) {
 		this.seatType = seatType;
 	}
 }

@@ -16,6 +16,7 @@
 	<a href="./airline">Airline Master</a><br>
 	<a href="./flight">Flight Master</a><br>
 	<a href="./flightschedule">Flight Schedule</a><br>
+	<a href="./flightscheduleprice">Flight Schedule Price</a><br>
 	<br><br><a href="./logout">Logout</a>
 </body>
 </html>

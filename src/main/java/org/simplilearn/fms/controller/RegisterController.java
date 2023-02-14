@@ -1,7 +1,6 @@
 package org.simplilearn.fms.controller;
 
 import java.io.IOException;
-import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +26,7 @@ public class RegisterController extends HttpServlet {
 		String email = request.getParameter("email");
 		String mobile = request.getParameter("mobile");
 		String password = request.getParameter("password");
-		User user = new User(0, name, password, email, mobile, false, new HashSet<>());
+		User user = new User(0, name, password, email, mobile, false);
 		
 		boolean isInserted = userService.save(user);
 		

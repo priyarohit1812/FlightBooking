@@ -26,6 +26,9 @@ public class HibConfig {
 		properties.put(Environment.SHOW_SQL, true);
 		properties.put(Environment.FORMAT_SQL, true);
 		properties.put(Environment.HBM2DDL_AUTO, "update");
+		properties.put(Environment.C3P0_MIN_SIZE, 10);
+		properties.put(Environment.C3P0_MAX_SIZE, 50);
+		properties.put(Environment.C3P0_MAX_STATEMENTS, 100);
 		properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL8Dialect");
 		configuration.setProperties(properties);
 		configuration.addAnnotatedClass(User.class);

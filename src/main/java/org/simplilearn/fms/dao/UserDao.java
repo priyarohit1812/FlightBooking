@@ -20,6 +20,7 @@ public class UserDao implements IUserDao {
 		Query<User> query = session.createQuery(hql, User.class);
 		List<User> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -32,6 +33,7 @@ public class UserDao implements IUserDao {
 			Hibernate.initialize(user.getTickets());
 		}
 		session.close();
+		factory.close();
 		return user;
 	}
 
@@ -51,6 +53,7 @@ public class UserDao implements IUserDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 
 		return isInserted;
@@ -72,6 +75,7 @@ public class UserDao implements IUserDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 
 		return isUpdated;
@@ -96,6 +100,7 @@ public class UserDao implements IUserDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 
 		return isDeleted;
@@ -111,7 +116,11 @@ public class UserDao implements IUserDao {
 		query.setParameter("password", password);
 		query.setParameter("isAdmin", isAdmin);
 		User user = query.uniqueResult();
+		if (user != null) {
+			Hibernate.initialize(user.getTickets());
+		}
 		session.close();
+		factory.close();
 		return user;
 	}
 
@@ -124,6 +133,7 @@ public class UserDao implements IUserDao {
 		query.setParameter("isAdmin", isAdmin);
 		List<User> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -136,6 +146,7 @@ public class UserDao implements IUserDao {
 		query.setParameter("rootEmail", "root@fms.com");
 		User user = query.uniqueResult();
 		session.close();
+		factory.close();
 		return user;
 	}
 

@@ -35,16 +35,9 @@ public class AirportFormController extends HttpServlet {
 		String country = request.getParameter("country");
 		String pincode = request.getParameter("pincode");
 		int id =Integer.parseInt(request.getParameter("id"));
-		
-		
-		Airport airport = new Airport();
-		airport.setId(id);
-		airport.setName(name);
-		airport.setCity(city);
-		airport.setState(state);;
-		airport.setCountry(country);
-		airport.setPincode(pincode);
-		airportService.save(airport);
+				
+		Airport airport = new Airport(id,name,city,state,country,pincode);
+		this.airportService.save(airport);
 		Utility.ShowAlert(request, response, "airportform.jsp", "Airport saved successfully", "./airport");
 			
 	}

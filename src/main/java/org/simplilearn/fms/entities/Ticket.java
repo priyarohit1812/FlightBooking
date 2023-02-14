@@ -16,11 +16,11 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;	
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fms_users_id")
 	private User user;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fms_flight_schedule_price_id")
 	private FlightSchedulePrice price;
 

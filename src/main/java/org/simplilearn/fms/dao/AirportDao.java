@@ -19,6 +19,7 @@ public class AirportDao implements IAirportDao {
 		Query<Airport> query = session.createQuery(hql, Airport.class);
 		List<Airport> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -28,6 +29,7 @@ public class AirportDao implements IAirportDao {
 		Session session = factory.openSession();
 		Airport airport = session.get(Airport.class, id);
 		session.close();
+		factory.close();
 		return airport;
 	}
 
@@ -47,6 +49,7 @@ public class AirportDao implements IAirportDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -68,6 +71,7 @@ public class AirportDao implements IAirportDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -92,6 +96,7 @@ public class AirportDao implements IAirportDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;

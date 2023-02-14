@@ -1,11 +1,13 @@
 package org.simplilearn.fms.dao;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.simplilearn.fms.config.HibConfig;
 import org.simplilearn.fms.entities.FlightSchedule;
@@ -20,6 +22,7 @@ public class FlightScheduleDao implements IFlightScheduleDao {
 		Query<FlightSchedule> query = session.createQuery(hql, FlightSchedule.class);
 		List<FlightSchedule> all = query.list();
 		session.close();
+		factory.close();
 		return all;
 	}
 
@@ -32,6 +35,7 @@ public class FlightScheduleDao implements IFlightScheduleDao {
 			Hibernate.initialize(flightSchedule.getFlightSchedulePrice());
 		}
 		session.close();
+		factory.close();
 		return flightSchedule;
 	}
 
@@ -51,6 +55,7 @@ public class FlightScheduleDao implements IFlightScheduleDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isInserted;
@@ -72,6 +77,7 @@ public class FlightScheduleDao implements IFlightScheduleDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isUpdated;
@@ -96,9 +102,30 @@ public class FlightScheduleDao implements IFlightScheduleDao {
 			e.printStackTrace();
 		} finally {
 			session.close();
+			factory.close();
 		}
 		
 		return isDeleted;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FlightSchedule> search(int sourceId, int destinationId, Timestamp departure) {
+		String sql = "SELECT * FROM fms_flight_schedule fs WHERE fs.source_id = :source_id AND fs.destination_id = :destination_id AND departure >= :departure";
+		SessionFactory factory = HibConfig.getSessionFactory();
+		Session session = factory.openSession();
+		NativeQuery<FlightSchedule> query = session.createSQLQuery(sql);
+		query.addEntity(FlightSchedule.class);
+		query.setParameter("source_id", sourceId);
+		query.setParameter("destination_id", destinationId);
+		query.setParameter("departure", departure);
+		List<FlightSchedule> all = query.list();
+		for (FlightSchedule flightSchedule : all) {
+			Hibernate.initialize(flightSchedule.getFlightSchedulePrice());
+		}
+		session.close();
+		factory.close();
+		return all;
 	}
 
 }
