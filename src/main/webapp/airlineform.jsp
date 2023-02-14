@@ -41,20 +41,6 @@
 			<%=airline.getAddress()%></textarea><br><input
 			type="submit" value="save">
 	</form>
-	<br><br>Flights<br>
-	<table border="1" style="visibility: <%=visibility%>;">
-		<tr>
-			<td>Name</td>
-		</tr>
-		<%
-		for (Flight flight :flights ) {
-		%>
-		<tr>
-			<td><%=flight.getModel()%></td>
-		</tr>
-		<%
-		}
-		%>
-	</table>
+	
 </body>
 </html>

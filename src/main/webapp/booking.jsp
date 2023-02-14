@@ -69,6 +69,6 @@
 		</table>
 		<input type="submit" value="Book">
 	</form>
-	<p style="color: red;">${sessionScope.msg}</p>
+	
 </body>
 </html>
